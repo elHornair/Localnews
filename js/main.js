@@ -11,7 +11,7 @@ YUI().use("io-base", function(Y) {
         return !!navigator.geolocation;
     }
 
-    show_map = function handle_success(position) {
+    handle_success = function handle_success(position) {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         var speed = position.coords.speed;
