@@ -2,18 +2,20 @@ YUI({
     modules: {
        'ln-geolocation': {
            fullpath: "js/ln-geolocation.js"
-       },
+       }/*,
        'ln-articlemanager': {
            fullpath: "js/ln-articlemanager.js"
-       }
+       }*/
     }
-}).use('io-base', 'transition', 'gallery-accordion', 'ln-geolocation', 'ln-articlemanager', function(Y) {
+}).use('io-base', 'transition', /*'gallery-accordion', */'ln-geolocation', 'ln-articlemanager', function(Y) {
+    // TODO: get gallery-accordion as git submodule
 
     // geolocation
     Y.ln.geolocation.getCoords();
 
     // articlemanager
-    Y.ln.articlemanager.init();
+    //Y.ln.articlemanager.init();
+    //Y.ln.articlemanager.replaceArticles();
 
     // ajax
     function complete(id, response) {

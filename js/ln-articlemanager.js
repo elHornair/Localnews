@@ -44,6 +44,9 @@ YUI.add('ln-articlemanager', function(Y) {
         return {
             init: function() {
                 Y.log("init articlemanager");
+            },
+            replaceArticles: function() {
+                Y.log("replace articles now");
             }
         }
 
