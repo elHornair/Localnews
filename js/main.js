@@ -18,8 +18,17 @@ YUI({
 
     // map
     Y.ln.map.init({
-        domId: "#container"
+        mapDOMId: '#map',
+        pointerDOMId: '#pointer',
+        bBox: [
+            100,
+            200,
+            100,
+            1000,
+        ]
     });
+
+    Y.ln.map.setCoords(150, 700);
 
     // articlemanager
     //Y.ln.articlemanager.init();
