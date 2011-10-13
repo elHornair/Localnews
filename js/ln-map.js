@@ -9,19 +9,28 @@ YUI.add('ln-map', function(Y) {
         _latitudeToLocal = function (latitude) {
             var containerWidth = Y.one(_cfg.mapDOMId).getStyle('width');
             containerWidth = containerWidth.substr(0, containerWidth.length-2);
-            return containerWidth* ((latitude - _cfg.bBox[0]) / (_cfg.bBox[1] - _cfg.bBox[0]));
-        }
+            return containerWidth * ((latitude - _cfg.bBox[0]) / (_cfg.bBox[1] - _cfg.bBox[0]));
+        },
 
         _longitudeToLocal = function (longitude) {
             var containerHeight = Y.one(_cfg.mapDOMId).getStyle('height');
             containerHeight = containerHeight.substr(0, containerHeight.length-2);
-            return containerHeight* ((longitude - _cfg.bBox[2]) / (_cfg.bBox[3] - _cfg.bBox[2]));
+            return containerHeight * ((longitude - _cfg.bBox[2]) / (_cfg.bBox[3] - _cfg.bBox[2]));
+        },
+
+        _handleMapClick = function (e) {
+            var pointer = Y.one(_cfg.pointerDOMId);
+            pointer.setStyle('left', e.clientX);
+            pointer.setStyle('top', e.clientY);
+            // TODO: dispatch event
         }
 
         return {
 
             init: function (cfg) {
                 _cfg = cfg;
+                Y.one(_cfg.mapDOMId).on('click', _handleMapClick)
+                // TODO: init drag'n'drop for pointer
                 // animation
                 /*Y.one('#pointer').transition({
                     easing: 'ease-out',

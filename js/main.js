@@ -29,6 +29,7 @@ YUI({
     });
 
     Y.ln.map.setCoords(150, 700);
+    // TODO: center pointer somewhere
 
     // articlemanager
     //Y.ln.articlemanager.init();
