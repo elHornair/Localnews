@@ -20,8 +20,8 @@ YUI.add('ln-map', function(Y) {
 
         _handleMapClick = function (e) {
             var pointer = Y.one(_cfg.pointerDOMId);
-            pointer.setStyle('left', e.clientX);
-            pointer.setStyle('top', e.clientY);
+            pointer.setStyle('left', e.pageX);
+            pointer.setStyle('top', e.pageY);
             // TODO: dispatch event
         }
 
