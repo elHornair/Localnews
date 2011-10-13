@@ -5,6 +5,7 @@ YUI.add('ln-map', function(Y) {
     Y.ln.map = function() {
 
         var _cfg,
+            expanded = true,
 
         _latitudeToLocal = function (latitude) {
             var containerWidth = Y.one(_cfg.mapDOMId).getStyle('width');
@@ -31,21 +32,32 @@ YUI.add('ln-map', function(Y) {
                 _cfg = cfg;
                 Y.one(_cfg.mapDOMId).on('click', _handleMapClick)
                 // TODO: init drag'n'drop for pointer
-                // animation
-                /*Y.one('#pointer').transition({
-                    easing: 'ease-out',
-                    duration: 0.75,
-                    top: '200px',
-                    left: '300px'
-                }, function() {
-                    //Y.log("feddig anim: "+this);
-                });*/
             },
 
             setCoords: function (latitude, longitude) {
                 var pointer = Y.one(_cfg.pointerDOMId);
                 pointer.setStyle('left', _latitudeToLocal(latitude));
                 pointer.setStyle('top', _longitudeToLocal(longitude));
+            },
+
+            toggleMap: function () {
+                var newHeight;
+                if (expanded) {
+                    newHeight = '0';
+                    expanded = false;
+                } else {
+                    newHeight = Y.one(_cfg.mapDOMId).getStyle('height');
+                    expanded = true;
+                }
+
+                // animation
+                Y.one(_cfg.containerDOMId).transition({
+                    easing: 'ease-out',
+                    duration: 0.6,
+                    height: newHeight,
+                }, function() {
+                    Y.log("feddig anim: "+this);
+                });
             }
 
         }

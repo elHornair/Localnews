@@ -18,6 +18,7 @@ YUI({
 
     // map
     Y.ln.map.init({
+        containerDOMId: '#mapContainer',
         mapDOMId: '#map',
         pointerDOMId: '#pointer',
         bBox: [
@@ -27,6 +28,8 @@ YUI({
             1000,
         ]
     });
+
+    Y.one('#showMap').on('click', Y.ln.map.toggleMap);
 
     Y.ln.map.setCoords(150, 700);
     // TODO: center pointer somewhere
