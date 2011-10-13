@@ -1,4 +1,8 @@
-#pointer {
+.mapContainer {
+    overflow: hidden;
+}
+
+.pointer {
     position: absolute;
     top: 0;
     left: 0;
