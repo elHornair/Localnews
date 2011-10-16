@@ -3,51 +3,44 @@ YUI.add('ln-articlemanager', function(Y) {
     Y.namespace('ln');
 
     Y.ln.articlemanager = function() {
-        var accordion,
-            items = [];
+        var i,
+            accordion,
+            item;
 
         accordion = new Y.Accordion({
-            srcNode: "#acc1",
+            srcNode: '#articleAccordion',
             useAnimation: true,
             collapseOthersOnExpand: true
         });
-
-        items['item1'] = new Y.AccordionItem( {
-            label: "Item1",
-            expanded: true,
-            id: "dynamicItem1",
-            contentHeight: {
-                method: "stretch"
-            },
-            closable: true
-        } );
-
-        items['item1'].set( "bodyContent", "This is the body of the item, added dynamically to accordion.<br>Content height has been set as \"fixed, 80px\"." );
-
-        accordion.addItem( items['item1'] );
-
-        items['item2'] = new Y.AccordionItem( {
-            label: "Item2",
-            expanded: false,
-            id: "dynamicItem2",
-            contentHeight: {
-                method: "stretch"
-            }
-        } );
-
-        items['item2'].set( "bodyContent", "This is the body of the item, added dynamically to accordion, before item1.<br>Content height has been set as \"stretch\"." );
-
-        accordion.addItem( items['item2'] );
-
         accordion.render();
 
         return {
+
             init: function() {
                 Y.log("init articlemanager");
             },
+
             replaceArticles: function() {
-                Y.log("replace articles now");
+
+                // remove old articles
+                Y.one('#articleAccordion').set( 'innerHTML', '');
+
+                // add new articles
+                for (i=0; i<3; i++) {
+
+                    item = new Y.AccordionItem( {
+                        label: 'title',
+                        id: 'dynamicItem'+i,
+                        contentHeight: {
+                            method: "auto"
+                        }
+                    });
+
+                    item.set( 'bodyContent', "<div style='position:relative;'>body of article</div>" );
+                    accordion.addItem( item );
+                }
             }
+
         }
 
     }();

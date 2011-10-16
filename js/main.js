@@ -5,12 +5,12 @@ YUI({
        },
        'ln-map': {
            fullpath: "js/ln-map.js"
-       }/*,
+       },
        'ln-articlemanager': {
            fullpath: "js/ln-articlemanager.js"
-       }*/
+       }
     }
-}).use('io-base', 'transition', /*'gallery-accordion', */'ln-geolocation', 'ln-articlemanager', 'ln-map', function(Y) {
+}).use('io-base', 'transition', 'gallery-accordion', 'ln-geolocation', 'ln-articlemanager', 'ln-map', function(Y) {
     // TODO: get gallery-accordion as git submodule
 
     // geolocation
@@ -35,8 +35,8 @@ YUI({
     // TODO: center pointer somewhere
 
     // articlemanager
-    //Y.ln.articlemanager.init();
-    //Y.ln.articlemanager.replaceArticles();
+    Y.ln.articlemanager.init();
+    Y.ln.articlemanager.replaceArticles();
 
     // ajax
     function complete(id, response) {
