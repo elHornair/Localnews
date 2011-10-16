@@ -41,12 +41,19 @@ YUI.add('ln-map', function(Y) {
             },
 
             toggleMap: function () {
-                var newHeight;
+                var newHeight,
+                    newOpacity,
+                    delay;
+
                 if (expanded) {
                     newHeight = '0';
+                    newOpacity = 0;
+                    delay = 0;
                     expanded = false;
                 } else {
                     newHeight = Y.one(_cfg.mapDOMId).getStyle('height');
+                    newOpacity = 1;
+                    delay = 0.3;
                     expanded = true;
                 }
 
@@ -57,6 +64,13 @@ YUI.add('ln-map', function(Y) {
                     height: newHeight,
                 }, function() {
                     Y.log("feddig anim: "+this);
+                });
+
+                Y.one(_cfg.pointerDOMId).transition({
+                    easing: 'ease-out',
+                    duration: 0.3,
+                    delay: delay,
+                    opacity: newOpacity
                 });
             }
 
