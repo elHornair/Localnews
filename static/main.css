@@ -1,3 +1,7 @@
+body {
+    width: 480px;
+}
+
 .mapContainer {
     overflow: hidden;
 }
@@ -9,4 +13,8 @@
     width: 10px;
     height: 10px;
     background-color: #ff0000;
+}
+
+.map {
+    width: 100%;
 }
