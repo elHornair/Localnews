@@ -3,10 +3,14 @@ body {
     width: 480px;
 }
 
+header {
+    background-color: rgb(188,72,72);
+}
+
 header h1,
 header p {
     text-align: center;
-    margin: 5px;
+    margin: 0;
 }
 
 header p span {
@@ -53,7 +57,7 @@ button.showMap {
 
 button.showMap:hover {
     background-color: rgb(208,92,92);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(208,92,92)), to(rgb(136,59,59)));
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(188,72,72)), to(rgb(208,92,92)));
 }
 
 /****************** articles *****************/
