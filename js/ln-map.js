@@ -31,6 +31,7 @@ YUI.add('ln-map', function(Y) {
             init: function (cfg) {
                 _cfg = cfg;
                 Y.one(_cfg.mapDOMId).on('click', _handleMapClick)
+                this.toggleMap();
                 // TODO: init drag'n'drop for pointer
             },
 
@@ -43,16 +44,19 @@ YUI.add('ln-map', function(Y) {
             toggleMap: function () {
                 var newHeight,
                     newOpacity,
+                    newContent,
                     delay;
 
                 if (expanded) {
                     newHeight = '0';
                     newOpacity = 0;
+                    newContent = 'Show Map';
                     delay = 0;
                     expanded = false;
                 } else {
                     newHeight = Y.one(_cfg.mapDOMId).getStyle('height');
                     newOpacity = 1;
+                    newContent = 'Hide Map';
                     delay = 0.3;
                     expanded = true;
                 }
@@ -63,7 +67,7 @@ YUI.add('ln-map', function(Y) {
                     duration: 0.6,
                     height: newHeight,
                 }, function() {
-                    Y.log("feddig anim: "+this);
+                    Y.one('#showMap').setContent(newContent);
                 });
 
                 Y.one(_cfg.pointerDOMId).transition({
