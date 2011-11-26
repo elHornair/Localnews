@@ -20,9 +20,10 @@ YUI.add('ln-map', function(Y) {
         },
 
         _handleMapClick = function (e) {
+            var container = Y.one(_cfg.containerDOMId);
             var pointer = Y.one(_cfg.pointerDOMId);
-            pointer.setStyle('left', e.pageX);
-            pointer.setStyle('top', e.pageY);
+            pointer.setStyle('left', e.pageX - container.getX());
+            pointer.setStyle('top', e.pageY - container.getY());
             // TODO: dispatch event
         }
 
@@ -39,6 +40,14 @@ YUI.add('ln-map', function(Y) {
                 var pointer = Y.one(_cfg.pointerDOMId);
                 pointer.setStyle('left', _latitudeToLocal(latitude));
                 pointer.setStyle('top', _longitudeToLocal(longitude));
+            },
+
+            setRegion: function (regionIndex) {
+                var map_overlay = Y.one(_cfg.mapOverlayDOMId);
+                var imgHeight = Y.one(_cfg.mapDOMId).getStyle('height');
+                imgHeight = imgHeight.substr(0, imgHeight.length-2)
+                map_overlay.setStyle('margin-top', -imgHeight*regionIndex);
+                map_overlay.setStyle('display', 'block');
             },
 
             toggleMap: function () {

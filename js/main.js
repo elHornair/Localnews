@@ -10,7 +10,7 @@ YUI({
            fullpath: "js/ln-articlemanager.js"
        }
     }
-}).use('io-base', 'transition', 'gallery-accordion', 'ln-geolocation', 'ln-articlemanager', 'ln-map', function(Y) {
+}).use('node', 'io-base', 'transition', 'gallery-accordion', 'ln-geolocation', 'ln-articlemanager', 'ln-map', function(Y) {
     // TODO: get gallery-accordion as git submodule
 
     // geolocation
@@ -20,6 +20,7 @@ YUI({
     Y.ln.map.init({
         containerDOMId: '#mapContainer',
         mapDOMId: '#map',
+        mapOverlayDOMId: '#map_overlay',
         pointerDOMId: '#pointer',
         bBox: [
             100,
@@ -31,8 +32,9 @@ YUI({
 
     Y.one('#showMap').on('click', Y.ln.map.toggleMap);
 
-    Y.ln.map.setCoords(150, 700);
     // TODO: center pointer somewhere
+    Y.ln.map.setCoords(150, 700);
+    //Y.ln.map.setRegion(5);
 
     // articlemanager
     Y.ln.articlemanager.init();
