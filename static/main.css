@@ -1,4 +1,6 @@
 /****************** general ******************/
+html {overflow-y: scroll;}
+
 header {
     background-color: rgb(188,72,72);
 }
