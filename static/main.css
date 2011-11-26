@@ -1,5 +1,11 @@
 /****************** general ******************/
-html {overflow-y: scroll;}
+html {
+    overflow-y: scroll;
+}
+
+body {
+    margin:  0;
+}
 
 header {
     background-color: rgb(188,72,72);

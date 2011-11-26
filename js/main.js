@@ -40,7 +40,7 @@ YUI({
 
     // TODO: place pointer somewhere that makes sense
     Y.ln.map.setCoords(5.957079, 46.128341);
-    //Y.ln.map.setRegion(5);
+    Y.ln.map.setRegion(5);
 
     // articlemanager
     Y.ln.articlemanager.init();

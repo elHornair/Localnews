@@ -32,7 +32,7 @@ YUI.add('ln-map', function(Y) {
         },
 
         _handleMapClick = function (e) {
-            var container = Y.one(_cfg.mapDOMId);
+            var container = Y.one(_cfg.containerDOMId);
             var pointer = Y.one(_cfg.pointerDOMId);
             var currentX = e.pageX - container.getX();
             var currentY = e.pageY - container.getY();
@@ -50,7 +50,7 @@ YUI.add('ln-map', function(Y) {
 
             init: function (cfg) {
                 _cfg = cfg;
-                Y.one(_cfg.mapDOMId).on('click', _handleMapClick)
+                Y.one(_cfg.containerDOMId).on('click', _handleMapClick)
                 this.toggleMap();
                 // TODO: init drag'n'drop for pointer
             },
