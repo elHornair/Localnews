@@ -7,24 +7,43 @@ YUI.add('ln-map', function(Y) {
         var _cfg,
             expanded = true,
 
-        _latitudeToLocal = function (latitude) {
+        _longitudeToLocal = function (longitude) {
             var containerWidth = Y.one(_cfg.mapDOMId).getStyle('width');
             containerWidth = containerWidth.substr(0, containerWidth.length-2);
-            return containerWidth * ((latitude - _cfg.bBox[0]) / (_cfg.bBox[1] - _cfg.bBox[0]));
+            return (longitude-_cfg.bBox[0])*containerWidth/(_cfg.bBox[1]-_cfg.bBox[0]);
         },
 
-        _longitudeToLocal = function (longitude) {
+        _latitudeToLocal = function (latitude) {
             var containerHeight = Y.one(_cfg.mapDOMId).getStyle('height');
             containerHeight = containerHeight.substr(0, containerHeight.length-2);
-            return containerHeight * ((longitude - _cfg.bBox[2]) / (_cfg.bBox[3] - _cfg.bBox[2]));
+            return (_cfg.bBox[2] - latitude)*containerHeight/(_cfg.bBox[2]-_cfg.bBox[3]);
+        },
+
+        _localToLongitude = function (x) {
+            var containerWidth = Y.one(_cfg.mapDOMId).getStyle('width');
+            containerWidth = containerWidth.substr(0, containerWidth.length-2);
+            return _cfg.bBox[0]+x*(_cfg.bBox[1]-_cfg.bBox[0])/containerWidth;
+        },
+
+        _localToLatitude = function (y) {
+            var containerHeight = Y.one(_cfg.mapDOMId).getStyle('height');
+            containerHeight = containerHeight.substr(0, containerHeight.length-2);
+            return _cfg.bBox[2]-y*(_cfg.bBox[2]-_cfg.bBox[3])/containerHeight;
         },
 
         _handleMapClick = function (e) {
-            var container = Y.one(_cfg.containerDOMId);
+            var container = Y.one(_cfg.mapDOMId);
             var pointer = Y.one(_cfg.pointerDOMId);
-            pointer.setStyle('left', e.pageX - container.getX());
-            pointer.setStyle('top', e.pageY - container.getY());
-            // TODO: dispatch event
+            var currentX = e.pageX - container.getX();
+            var currentY = e.pageY - container.getY();
+
+            pointer.setStyle('left', currentX);
+            pointer.setStyle('top', currentY);
+
+            Y.fire('ln-map:onLocationSelected', {
+                long: _localToLongitude(currentX),
+                lat: _localToLatitude(currentY)
+            });
         }
 
         return {
@@ -36,10 +55,10 @@ YUI.add('ln-map', function(Y) {
                 // TODO: init drag'n'drop for pointer
             },
 
-            setCoords: function (latitude, longitude) {
+            setCoords: function (longitude, latitude) {
                 var pointer = Y.one(_cfg.pointerDOMId);
-                pointer.setStyle('left', _latitudeToLocal(latitude));
-                pointer.setStyle('top', _longitudeToLocal(longitude));
+                pointer.setStyle('left', _longitudeToLocal(longitude));
+                pointer.setStyle('top', _latitudeToLocal(latitude));
             },
 
             setRegion: function (regionIndex) {
