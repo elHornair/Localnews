@@ -10,7 +10,7 @@ YUI({
            fullpath: "js/ln-articlemanager.js"
        }
     }
-}).use('node', 'event-custom', 'io-base', 'transition', 'gallery-accordion', 'ln-geolocation', 'ln-articlemanager', 'ln-map', function(Y) {
+}).use('node', 'event-custom', 'json-stringify', 'io-base', 'transition', 'gallery-accordion', 'ln-geolocation', 'ln-articlemanager', 'ln-map', function(Y) {
     // TODO: get gallery-accordion as git submodule
 
     // geolocation
@@ -32,10 +32,23 @@ YUI({
 
     Y.one('#showMap').on('click', Y.ln.map.toggleMap);
 
+    Y.on('io:complete', complete, Y);// TODO: don't listen to that globally
+
+    //var points = [];
+
     Y.on('ln-map:onLocationSelected', function (e) {
-        // TODO: send request to server to get news for this area
-        Y.log(e.long);
-        Y.log(e.lat);
+        var point = {
+            'x': e.long,
+            'y': e.lat
+        }
+
+        Y.io('data.php', {
+            method: 'POST',
+            data: 'point=' + Y.JSON.stringify(point)
+        });
+
+        points.push(point);
+        //Y.log(Y.JSON.stringify(points));
     });
 
     // TODO: place pointer somewhere that makes sense
@@ -49,10 +62,7 @@ YUI({
     // ajax
     function complete(id, response) {
         var data = response.responseText;
-        Y.log(data);complete
+        Y.log(data);
     };
-
-    Y.on('io:complete', complete, Y);// TODO: don't listen to that globally
-    Y.io("data.php");
 
 });
