@@ -10,7 +10,7 @@ YUI({
            fullpath: "js/ln-articlemanager.js"
        }
     }
-}).use('node', 'event-custom', 'json-stringify', 'io-base', 'transition', 'gallery-accordion', 'ln-geolocation', 'ln-articlemanager', 'ln-map', function(Y) {
+}).use('node', 'event-custom', 'json-parse', 'json-stringify', 'io-base', 'transition', 'gallery-accordion', 'ln-geolocation', 'ln-articlemanager', 'ln-map', function(Y) {
     // TODO: get gallery-accordion as git submodule
 
     // geolocation
@@ -47,7 +47,7 @@ YUI({
             data: 'point=' + Y.JSON.stringify(point)
         });
 
-        points.push(point);
+        //points.push(point);
         //Y.log(Y.JSON.stringify(points));
     });
 
@@ -61,8 +61,9 @@ YUI({
 
     // ajax
     function complete(id, response) {
-        var data = response.responseText;
-        Y.log(data);
+        var data = Y.JSON.parse(response.responseText);
+        Y.ln.map.setRegion(data.index);
+        //Y.log(data);
     };
 
 });

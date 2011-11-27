@@ -9,8 +9,9 @@
 
     $regions = array(
         array(
+            'index' => 1,
             'name' => 'west',
-            'data' => json_decode($west, true)
+            'boundings' => json_decode($west, true)
         ),
         /*array(
             'name' => 'mittelland',
@@ -18,14 +19,19 @@
         ),*/
     );
 
-    $targetRegion = 'none';
+    $targetRegion = array(
+        'index' => 0,
+        'name' => 'none'
+    );
+
     for ($i = 0; $i < count($regions); $i++) {
-        if (PointInPolygon::isPointInPolygon($regions[$i]['data'], $point) != -1) {
-            $targetRegion = $regions[$i]['name'];
+        if (PointInPolygon::isPointInPolygon($regions[$i]['boundings'], $point) != -1) {
+            unset($regions[$i]['boundings']);
+            $targetRegion = $regions[$i];
             break;
         }
     }
 
-    echo $targetRegion;
+    echo json_encode($targetRegion);
 
 ?>
