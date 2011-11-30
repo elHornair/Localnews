@@ -13,9 +13,6 @@ YUI({
 }).use('node', 'event-custom', 'json-parse', 'json-stringify', 'io-base', 'transition', 'gallery-accordion', 'ln-geolocation', 'ln-articlemanager', 'ln-map', function(Y) {
     // TODO: get gallery-accordion as git submodule
 
-    // geolocation
-    Y.ln.geolocation.getCoords();
-
     // map
     Y.ln.map.init({
         containerDOMId: '#map_container',
@@ -32,7 +29,17 @@ YUI({
 
     Y.one('#showMap').on('click', Y.ln.map.toggleMap);
 
-    Y.on('io:complete', complete, Y);// TODO: don't listen to that globally
+    // geolocation
+    Y.ln.geolocation.askForCoords();
+
+    Y.on('ln-geolocation:onNoCoords', function (e) {
+        Y.log('no coords');
+        // TODO: show default location
+    });
+
+    Y.on('ln-geolocation:onReceivedCoords', function (e) {
+        Y.ln.map.setCoords(e.long, e.lat);
+    });
 
     //var points = [];
 
@@ -52,14 +59,14 @@ YUI({
     });
 
     // TODO: place pointer somewhere that makes sense
-    Y.ln.map.setCoords(5.957079, 46.128341);
-    Y.ln.map.setRegion(5);
 
     // articlemanager
     Y.ln.articlemanager.init();
     Y.ln.articlemanager.replaceArticles();
 
     // ajax
+    Y.on('io:complete', complete, Y);// TODO: don't listen to that globally
+
     function complete(id, response) {
         var data = Y.JSON.parse(response.responseText);
         Y.ln.map.setRegion(data.index);

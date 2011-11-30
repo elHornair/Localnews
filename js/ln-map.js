@@ -40,9 +40,13 @@ YUI.add('ln-map', function(Y) {
             pointer.setStyle('left', currentX);
             pointer.setStyle('top', currentY);
 
+            _dispatchLocationSelected(_localToLongitude(currentX), _localToLatitude(currentY));
+        }
+
+        _dispatchLocationSelected = function (long, lat) {
             Y.fire('ln-map:onLocationSelected', {
-                long: _localToLongitude(currentX),
-                lat: _localToLatitude(currentY)
+                long: long,
+                lat: lat
             });
         }
 
@@ -59,6 +63,7 @@ YUI.add('ln-map', function(Y) {
                 var pointer = Y.one(_cfg.pointerDOMId);
                 pointer.setStyle('left', _longitudeToLocal(longitude));
                 pointer.setStyle('top', _latitudeToLocal(latitude));
+                _dispatchLocationSelected(longitude, latitude);
             },
 
             setRegion: function (regionIndex) {
@@ -93,7 +98,7 @@ YUI.add('ln-map', function(Y) {
                 Y.one(_cfg.containerDOMId).transition({
                     easing: 'ease-out',
                     duration: 0.6,
-                    height: newHeight,
+                    height: newHeight
                 }, function() {
                     Y.one('#showMap').setContent(newContent);
                 });

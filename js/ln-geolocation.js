@@ -8,31 +8,27 @@ YUI.add('ln-geolocation', function(Y) {
             handle_success,
             handle_error;
 
-        checkSupport = function() {
+        _checkSupport = function() {
             return !!navigator.geolocation;
         }
 
-        handle_success = function(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-
-            Y.log("latitude: "+latitude);
-            Y.log("longitude: "+longitude);
+        _dispatchReceivedCoords = function(position) {
+            Y.fire('ln-geolocation:onReceivedCoords', {
+                long: position.coords.longitude,
+                lat: position.coords.latitude
+            });
         }
 
-        handle_error = function(e) {
-            if (e.code == 1) {
-                Y.log("user said no");
-            }
+        _dispatchNoCoords = function(e) {
+            Y.fire('ln-geolocation:onNoCoords');
         }
 
         return {
-            getCoords: function() {
-                if (checkSupport()) {
-                    navigator.geolocation.getCurrentPosition(handle_success, handle_error);
+            askForCoords: function() {
+                if (_checkSupport()) {
+                    navigator.geolocation.getCurrentPosition(_dispatchReceivedCoords, _dispatchNoCoords);
                 } else {
-                    Y.log("browser not capable");
-                    return false;
+                    _dispatchNoCoords();
                 }
             }
         }
