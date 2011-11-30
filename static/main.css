@@ -22,11 +22,6 @@ header p span {
     color: rgb(136,59,59);
 }
 
-h2 {
-    text-align: center;
-    color: rgb(136,59,59);
-}
-
 /******************** map ********************/
 #map_container {
     overflow: hidden;
@@ -84,6 +79,22 @@ article {
     border-color: rgb(188,72,72);
 }
 
+.yui3-accordion-item-label {
+    text-decoration: none;
+}
+
+.yui3-accordion-item-label h2 {
+    color: rgb(136,59,59);
+}
+
+.yui3-accordion-item-label p.subtitle {
+    text-decoration: none;
+    font-style: italic;
+    color: #000000;
+}
+
 .yui3-accordion-item-content {
     overflow: hidden;
+    border-bottom: dotted;
+    border-color: rgb(188,72,72);
 }

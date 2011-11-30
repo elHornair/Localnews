@@ -62,7 +62,6 @@ YUI({
 
     // articlemanager
     Y.ln.articlemanager.init();
-    Y.ln.articlemanager.replaceArticles();
 
     // ajax
     Y.on('io:complete', complete, Y);// TODO: don't listen to that globally
@@ -70,7 +69,7 @@ YUI({
     function complete(id, response) {
         var data = Y.JSON.parse(response.responseText);
         Y.ln.map.setRegion(data.index);
-        //Y.log(data);
+        Y.ln.articlemanager.replaceArticles(data.articles);
     };
 
 });

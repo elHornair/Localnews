@@ -20,23 +20,23 @@ YUI.add('ln-articlemanager', function(Y) {
                 Y.log("init articlemanager");
             },
 
-            replaceArticles: function() {
+            replaceArticles: function(articles) {
 
                 // remove old articles
                 Y.one('#articleAccordion').set( 'innerHTML', '');
 
                 // add new articles
-                for (i=0; i<3; i++) {
+                for (i=0; i<articles.length; i++) {
 
                     item = new Y.AccordionItem( {
-                        label: 'title',
+                        label: articles[i].title,
                         id: 'dynamicItem'+i,
                         contentHeight: {
                             method: "auto"
                         }
                     });
 
-                    item.set( 'bodyContent', "<div style='position:relative;'>body of article</div>" );
+                    item.set('bodyContent', articles[i].body);
                     accordion.addItem( item );
                 }
             }
