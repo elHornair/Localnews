@@ -95,4 +95,5 @@ article .subtitle {
 
 article .article_body {
     overflow: hidden;
+    height: 0;
 }

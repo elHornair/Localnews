@@ -4,24 +4,23 @@ YUI.add('ln-articlemanager', function(Y) {
 
     Y.ln.articlemanager = function() {
 
-        var currentItem;
+        var _currentItem;
 
         _handleItemClick = function (e) {
             var clickedItem;
 
             e.preventDefault();
-            clickedItem = e.currentTarget.get('id');
-            Y.log(clickedItem);
-            // TODO: close currentItem
-            // TODO: open e.target
-            // TODO: on finished: currentItem = e.target
+            clickedItem = Y.one('#article_body_' + e.currentTarget.get('id'));
+            clickedItem.setStyle('height', 'auto');
+
+            if (!Y.Lang.isUndefined(_currentItem)) {
+                _currentItem.setStyle('height', 0);
+            }
+            _currentItem = clickedItem;
+            // TODO: do it as an animation
         }
 
         return {
-
-            init: function() {
-                Y.log("init articlemanager");
-            },
 
             replaceArticles: function(articles) {
 
@@ -31,8 +30,8 @@ YUI.add('ln-articlemanager', function(Y) {
                     headItem,
                     bodyItem;
 
+                _currentItem = undefined;
                 container = Y.one('#articleAccordion');
-
                 container.set( 'innerHTML', '');
 
                 // add new articles

@@ -60,9 +60,6 @@ YUI({
 
     // TODO: place pointer somewhere that makes sense
 
-    // articlemanager
-    Y.ln.articlemanager.init();
-
     // ajax
     Y.on('io:complete', complete, Y);// TODO: don't listen to that globally
 
