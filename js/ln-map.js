@@ -70,8 +70,15 @@ YUI.add('ln-map', function(Y) {
                 var map_overlay = Y.one(_cfg.mapOverlayDOMId);
                 var imgHeight = Y.one(_cfg.mapDOMId).getStyle('height');
                 imgHeight = imgHeight.substr(0, imgHeight.length-2)
-                map_overlay.setStyle('margin-top', -imgHeight*regionIndex);
                 map_overlay.setStyle('display', 'block');
+                map_overlay.setStyle('opacity', 0);
+                map_overlay.setStyle('margin-top', -imgHeight*regionIndex);
+
+                map_overlay.transition({
+                    easing: 'ease-out',
+                    duration: 0.6,
+                    opacity: 1
+                });
             },
 
             toggleMap: function () {
