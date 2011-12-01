@@ -3,16 +3,19 @@ YUI.add('ln-articlemanager', function(Y) {
     Y.namespace('ln');
 
     Y.ln.articlemanager = function() {
-        var i,
-            accordion,
-            item;
 
-        accordion = new Y.Accordion({
-            srcNode: '#articleAccordion',
-            useAnimation: true,
-            collapseOthersOnExpand: true
-        });
-        accordion.render();
+        var currentItem;
+
+        _handleItemClick = function (e) {
+            var clickedItem;
+
+            e.preventDefault();
+            clickedItem = e.currentTarget.get('id');
+            Y.log(clickedItem);
+            // TODO: close currentItem
+            // TODO: open e.target
+            // TODO: on finished: currentItem = e.target
+        }
 
         return {
 
@@ -23,25 +26,33 @@ YUI.add('ln-articlemanager', function(Y) {
             replaceArticles: function(articles) {
 
                 // remove old articles
-                Y.one('#articleAccordion').set( 'innerHTML', '');
+                var container,
+                    articleItem,
+                    headItem,
+                    bodyItem;
+
+                container = Y.one('#articleAccordion');
+
+                container.set( 'innerHTML', '');
 
                 // add new articles
                 for (i=0; i<articles.length; i++) {
 
-                    item = new Y.AccordionItem( {
-                        label: articles[i].title,
-                        id: 'dynamicItem'+i,
-                        contentHeight: {
-                            method: "auto"
-                        }
-                    });
+                    headItem = Y.Node.create('<a id="' + i + '" href="#">' + articles[i].title + '</a>');
+                    headItem.on('click', _handleItemClick);
+                    articleItem = Y.Node.create('<article></article>');
 
-                    item.set('bodyContent', articles[i].body);
-                    accordion.addItem( item );
+                    bodyItem = Y.Node.create('<div id="article_body_' + i + '" class="article_body">' + articles[i].body + '</div>');
+
+                    articleItem.append(headItem);
+                    articleItem.append(bodyItem);
+
+                    container.append(articleItem);
+
                 }
             }
 
         }
 
     }();
-}, '0.0.1', { requires: ['gallery-accordion'] });
+}, '0.0.1');

@@ -10,7 +10,7 @@ YUI({
            fullpath: "js/ln-articlemanager.js"
        }
     }
-}).use('node', 'event-custom', 'json-parse', 'json-stringify', 'io-base', 'transition', 'gallery-accordion', 'ln-geolocation', 'ln-articlemanager', 'ln-map', function(Y) {
+}).use('node', 'event-custom', 'json-parse', 'json-stringify', 'io-base', 'transition'/*, 'gallery-accordion'*/, 'ln-geolocation', 'ln-articlemanager', 'ln-map', function(Y) {
     // TODO: get gallery-accordion as git submodule
 
     // map

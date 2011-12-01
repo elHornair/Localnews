@@ -79,22 +79,20 @@ article {
     border-color: rgb(188,72,72);
 }
 
-.yui3-accordion-item-label {
+article a {
     text-decoration: none;
 }
 
-.yui3-accordion-item-label h2 {
+article h2 {
     color: rgb(136,59,59);
 }
 
-.yui3-accordion-item-label p.subtitle {
+article .subtitle {
     text-decoration: none;
     font-style: italic;
     color: #000000;
 }
 
-.yui3-accordion-item-content {
+article .article_body {
     overflow: hidden;
-    border-bottom: dotted;
-    border-color: rgb(188,72,72);
 }
