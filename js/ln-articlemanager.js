@@ -5,7 +5,8 @@ YUI.add('ln-articlemanager', function(Y) {
     Y.ln.articlemanager = function() {
 
         var _itemHeights,
-            _currentItem;
+            _currentItem
+            _transitionTime = 0.3;
 
         _handleItemClick = function (e) {
             var clickedItem,
@@ -15,23 +16,32 @@ YUI.add('ln-articlemanager', function(Y) {
             clickedItemId = e.currentTarget.get('id');
             clickedItem = Y.one('#article_body_' + clickedItemId);
 
-            clickedItem.transition({
-                easing: 'ease-out',
-                duration: 0.3,
-                height: _itemHeights[clickedItemId]
-            }, function() {
-                _currentItem = clickedItem;
-            });
+            if (clickedItem !== _currentItem) {
+                clickedItem.transition({
+                    easing: 'ease-out',
+                    duration: _transitionTime,
+                    height: _itemHeights[clickedItemId]
+                }, function() {
+                    _currentItem = clickedItem;
+                });
 
-            if (!Y.Lang.isUndefined(_currentItem)) {
+                if (!Y.Lang.isUndefined(_currentItem)) {
+                    _currentItem.transition({
+                        easing: 'ease-out',
+                        duration: _transitionTime,
+                        height: 0
+                    });
+                }
+            } else {
                 _currentItem.transition({
                     easing: 'ease-out',
-                    duration: 0.3,
+                    duration: _transitionTime,
                     height: 0
+                }, function() {
+                    _currentItem = undefined;
                 });
             }
 
-            // TODO: make it closeable (dont mess it up, check if its same as already active)
         }
 
         return {
