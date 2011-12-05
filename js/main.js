@@ -58,7 +58,7 @@ YUI({
         //Y.log(Y.JSON.stringify(points));
     });
 
-    // TODO: place pointer somewhere that makes sense
+    // TODO: place pointer somewhere that makes sense (or make it invisible while searching for location)
 
     // ajax
     Y.on('io:complete', complete, Y);// TODO: don't listen to that globally

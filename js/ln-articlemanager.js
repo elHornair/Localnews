@@ -4,20 +4,34 @@ YUI.add('ln-articlemanager', function(Y) {
 
     Y.ln.articlemanager = function() {
 
-        var _currentItem;
+        var _itemHeights,
+            _currentItem;
 
         _handleItemClick = function (e) {
-            var clickedItem;
+            var clickedItem,
+                clickedItemId;
 
             e.preventDefault();
-            clickedItem = Y.one('#article_body_' + e.currentTarget.get('id'));
-            clickedItem.setStyle('height', 'auto');
+            clickedItemId = e.currentTarget.get('id');
+            clickedItem = Y.one('#article_body_' + clickedItemId);
+
+            clickedItem.transition({
+                easing: 'ease-out',
+                duration: 0.3,
+                height: _itemHeights[clickedItemId]
+            }, function() {
+                _currentItem = clickedItem;
+            });
 
             if (!Y.Lang.isUndefined(_currentItem)) {
-                _currentItem.setStyle('height', 0);
+                _currentItem.transition({
+                    easing: 'ease-out',
+                    duration: 0.3,
+                    height: 0
+                });
             }
-            _currentItem = clickedItem;
-            // TODO: do it as an animation
+
+            // TODO: make it closeable (dont mess it up, check if its same as already active)
         }
 
         return {
@@ -30,7 +44,9 @@ YUI.add('ln-articlemanager', function(Y) {
                     headItem,
                     bodyItem;
 
+                // reset previous values
                 _currentItem = undefined;
+                _itemHeights = [];
                 container = Y.one('#articleAccordion');
                 container.set( 'innerHTML', '');
 
@@ -47,6 +63,9 @@ YUI.add('ln-articlemanager', function(Y) {
                     articleItem.append(bodyItem);
 
                     container.append(articleItem);
+
+                    _itemHeights.push(bodyItem.getStyle('height'));
+                    bodyItem.setStyle('height', 0);
 
                 }
             }
