@@ -32,8 +32,7 @@ YUI({
     Y.ln.geolocation.askForCoords();
 
     Y.on('ln-geolocation:onNoCoords', function (e) {
-        Y.log('no coords');
-        // TODO: show default location
+        Y.ln.map.setCoords(8.559942394467086, 47.46858359794547);
     });
 
     Y.on('ln-geolocation:onReceivedCoords', function (e) {
@@ -52,12 +51,10 @@ YUI({
         });
     });
 
-    // TODO: place pointer somewhere that makes sense (or make it invisible while searching for location)
-
     // ajax
-    Y.on('io:complete', _complete, Y);// TODO: don't listen to that globally
+    Y.on('io:complete', _handleAjaxResponse, Y);
 
-    function _complete(id, response) {
+    function _handleAjaxResponse(id, response) {
         var data = Y.JSON.parse(response.responseText);
 
         _replaceSubTitle(data.title, data.title_addition);
