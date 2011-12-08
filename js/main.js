@@ -60,19 +60,38 @@ YUI({
     // TODO: place pointer somewhere that makes sense (or make it invisible while searching for location)
 
     // ajax
-    Y.on('io:complete', complete, Y);// TODO: don't listen to that globally
+    Y.on('io:complete', _complete, Y);// TODO: don't listen to that globally
 
-    function complete(id, response) {
+    function _complete(id, response) {
         var data = Y.JSON.parse(response.responseText);
 
-        if (!Y.Lang.isUndefined(data.title)) {
-            Y.one('#location').set('innerHTML', data.title);
-        } else {
-            Y.one('#location').set('innerHTML', '...');
-        }
-
+        _replaceSubTitle(data.title, data.title_addition);
         Y.ln.map.setRegion(data.index);
         Y.ln.articlemanager.replaceArticles(data.articles);
     };
+
+    function _replaceSubTitle(location, addition) {
+        var subtitle = Y.one('#subtitle'),
+            currentLocation = Y.one('#location').get('innerHTML');
+
+        if (currentLocation != location && !(currentLocation == '...' && Y.Lang.isUndefined(location))) {
+            subtitle.setStyle('opacity', 0);
+
+            if (!Y.Lang.isUndefined(location)) {
+                Y.one('#location').set('innerHTML', location);
+                Y.one('#location_addition').set('innerHTML', addition);
+            } else {
+                Y.one('#location').set('innerHTML', '...');
+                Y.one('#location_addition').set('innerHTML', '');
+            }
+
+            subtitle.transition({
+                easing: 'ease-out',
+                duration: 0.6,
+                opacity: 1
+            });
+        }
+
+    }
 
 });

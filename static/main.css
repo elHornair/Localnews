@@ -17,7 +17,7 @@ header p {
     margin: 0;
 }
 
-header p span {
+#location {
     font-weight: bold;
     color: rgb(136,59,59);
 }

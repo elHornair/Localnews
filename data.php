@@ -15,6 +15,7 @@
         array(
             'index' => 1,
             'title' => 'Westschweiz',
+            'title_addition' => 'der',
             'articles' => array(
                 array(
                     'title' => '<h2>Some Westschweiz article yeah</h2><p class="subtitle">this is some additional information that is always visible</p>',
@@ -34,6 +35,7 @@
         array(
             'index' => 2,
             'title' => 'Mittelland',
+            'title_addition' => 'dem',
             'articles' => array(
                 array(
                     'title' => '<h2>Some Mittelland article yeah</h2><p class="subtitle">this is some additional information that is always visible</p>',
@@ -53,6 +55,7 @@
         array(
             'index' => 3,
             'title' => 'Zentralschweiz',
+            'title_addition' => 'der',
             'articles' => array(
                 array(
                     'title' => '<h2>Some Zentralschweiz article yeah</h2><p class="subtitle">this is some additional information that is always visible</p>',
@@ -71,7 +74,8 @@
         ),
         array(
             'index' => 4,
-            'title' => 'Zürich und Nordwestschweiz',
+            'title' => 'Nordwestschweiz',
+            'title_addition' => 'der',
             'articles' => array(
                 array(
                     'title' => '<h2>Some Nordwestschweiz article yeah</h2><p class="subtitle">this is some additional information that is always visible</p>',
@@ -91,6 +95,7 @@
         array(
             'index' => 5,
             'title' => 'Ostschweiz',
+            'title_addition' => 'der',
             'articles' => array(
                 array(
                     'title' => '<h2>Some Ostschweiz article yeah</h2><p class="subtitle">this is some additional information that is always visible</p>',
