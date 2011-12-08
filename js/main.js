@@ -40,8 +40,6 @@ YUI({
         Y.ln.map.setCoords(e.long, e.lat);
     });
 
-    //var points = [];
-
     Y.on('ln-map:onLocationSelected', function (e) {
         var point = {
             'x': e.long,
@@ -52,9 +50,6 @@ YUI({
             method: 'POST',
             data: 'point=' + Y.JSON.stringify(point)
         });
-
-        //points.push(point);
-        //Y.log(Y.JSON.stringify(points));
     });
 
     // TODO: place pointer somewhere that makes sense (or make it invisible while searching for location)
