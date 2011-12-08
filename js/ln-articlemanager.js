@@ -59,6 +59,7 @@ YUI.add('ln-articlemanager', function(Y) {
                 _itemHeights = [];
                 container = Y.one('#articleAccordion');
                 container.set( 'innerHTML', '');
+                container.setStyle( 'opacity', 0);
 
                 // add new articles
                 if (!Y.Lang.isUndefined(articles)) {
@@ -82,6 +83,12 @@ YUI.add('ln-articlemanager', function(Y) {
                 } else {
                     // TODO: do something :)
                 }
+
+                container.transition({
+                    easing: 'ease-out',
+                    duration: 0.6,
+                    opacity: 1
+                });
             }
 
         }
