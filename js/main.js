@@ -64,6 +64,13 @@ YUI({
 
     function complete(id, response) {
         var data = Y.JSON.parse(response.responseText);
+
+        if (!Y.Lang.isUndefined(data.title)) {
+            Y.one('#location').set('innerHTML', data.title);
+        } else {
+            Y.one('#location').set('innerHTML', '...');
+        }
+
         Y.ln.map.setRegion(data.index);
         Y.ln.articlemanager.replaceArticles(data.articles);
     };
