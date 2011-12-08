@@ -61,22 +61,26 @@ YUI.add('ln-articlemanager', function(Y) {
                 container.set( 'innerHTML', '');
 
                 // add new articles
-                for (i=0; i<articles.length; i++) {
+                if (!Y.Lang.isUndefined(articles)) {
+                    for (i=0; i<articles.length; i++) {
 
-                    headItem = Y.Node.create('<a id="' + i + '" href="#">' + articles[i].title + '</a>');
-                    headItem.on('click', _handleItemClick);
-                    articleItem = Y.Node.create('<article></article>');
+                        headItem = Y.Node.create('<a id="' + i + '" href="#">' + articles[i].title + '</a>');
+                        headItem.on('click', _handleItemClick);
+                        articleItem = Y.Node.create('<article></article>');
 
-                    bodyItem = Y.Node.create('<div id="article_body_' + i + '" class="article_body">' + articles[i].body + '</div>');
+                        bodyItem = Y.Node.create('<div id="article_body_' + i + '" class="article_body">' + articles[i].body + '</div>');
 
-                    articleItem.append(headItem);
-                    articleItem.append(bodyItem);
+                        articleItem.append(headItem);
+                        articleItem.append(bodyItem);
 
-                    container.append(articleItem);
+                        container.append(articleItem);
 
-                    _itemHeights.push(bodyItem.getStyle('height'));
-                    bodyItem.setStyle('height', 0);
+                        _itemHeights.push(bodyItem.getStyle('height'));
+                        bodyItem.setStyle('height', 0);
 
+                    }
+                } else {
+                    // TODO: do something :)
                 }
             }
 
