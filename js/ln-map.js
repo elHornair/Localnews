@@ -90,13 +90,13 @@ YUI.add('ln-map', function(Y) {
                 if (expanded) {
                     newHeight = '0';
                     newOpacity = 0;
-                    newContent = 'Show Map';
+                    newContent = 'Karte anzeigen';
                     delay = 0;
                     expanded = false;
                 } else {
                     newHeight = Y.one(_cfg.mapDOMId).getStyle('height');
                     newOpacity = 1;
-                    newContent = 'Hide Map';
+                    newContent = 'Karte verstecken';
                     delay = 0.3;
                     expanded = true;
                 }
