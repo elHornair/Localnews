@@ -39,6 +39,14 @@ header p {
     background-image: url('spinner.gif');
 }
 
+.error {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(136,59,59);
+    padding: 2em;
+}
+
 /******************** map ********************/
 #map_container {
     overflow: hidden;

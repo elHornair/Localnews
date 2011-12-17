@@ -62,8 +62,8 @@ YUI.add('ln-articlemanager', function(Y) {
                 container.set( 'innerHTML', '');
                 container.setStyle( 'opacity', 0);
 
-                // add new articles
                 if (!Y.Lang.isUndefined(articles)) {
+                    // add new articles
                     for (i=0; i<articles.length; i++) {
 
                         headItem = Y.Node.create('<a id="' + i + '" href="#">' + articles[i].title + '</a>');
@@ -82,7 +82,9 @@ YUI.add('ln-articlemanager', function(Y) {
 
                     }
                 } else {
-                    // TODO: do something :)
+                    // show error message
+                    articleItem = Y.Node.create('<div class="error">Für diese Position können keine News zur Verfügung gestellt werden. Bitte wähle über die Karte eine andere Region aus.</div>');
+                    container.append(articleItem);
                 }
 
                 container.transition({
