@@ -38,8 +38,31 @@ header p {
     position: relative;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* small phones */
+#map_container,
+#map,
+#map_overlay {
     width: 480px;
-    height: 286px;
+}
+
+/* bigger phones */
+@media only screen and (min-width: 640px){
+    #map_container,
+    #map,
+    #map_overlay {
+        width: 640px;
+    }
+}
+
+/* tablets and huge phones */
+@media only screen and (min-width: 768px){
+    #map_container,
+    #map,
+    #map_overlay {
+        width: 768px;
+    }
 }
 
 #pointer {

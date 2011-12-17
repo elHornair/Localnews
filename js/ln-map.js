@@ -69,10 +69,12 @@ YUI.add('ln-map', function(Y) {
             setRegion: function (regionIndex) {
                 var map_overlay = Y.one(_cfg.mapOverlayDOMId);
                 var imgHeight = Y.one(_cfg.mapDOMId).getStyle('height');
-                imgHeight = imgHeight.substr(0, imgHeight.length-2)
+                imgHeight = parseInt(imgHeight.substr(0, imgHeight.length-2), 10);
+                imgHeight = (imgHeight > 381) ? imgHeight + 0.5 : imgHeight;// hack, to make calculation on big screens accurate
                 map_overlay.setStyle('display', 'block');
+
                 map_overlay.setStyle('opacity', 0);
-                map_overlay.setStyle('margin-top', -imgHeight*regionIndex);
+                map_overlay.setStyle('margin-top', (-imgHeight)*regionIndex);
 
                 map_overlay.transition({
                     easing: 'ease-out',
