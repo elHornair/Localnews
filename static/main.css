@@ -38,6 +38,7 @@ header p {
     position: relative;
     margin-left: auto;
     margin-right: auto;
+    height: 0;
 }
 
 /* small phones */

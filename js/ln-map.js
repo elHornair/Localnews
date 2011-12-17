@@ -5,7 +5,7 @@ YUI.add('ln-map', function(Y) {
     Y.ln.map = function() {
 
         var _cfg,
-            expanded = true,
+            _expanded = false,
 
         _longitudeToLocal = function (longitude) {
             var containerWidth = Y.one(_cfg.mapDOMId).getStyle('width');
@@ -55,8 +55,6 @@ YUI.add('ln-map', function(Y) {
             init: function (cfg) {
                 _cfg = cfg;
                 Y.one(_cfg.containerDOMId).on('click', _handleMapClick)
-                this.toggleMap();
-                // TODO: init drag'n'drop for pointer
             },
 
             setCoords: function (longitude, latitude) {
@@ -89,18 +87,18 @@ YUI.add('ln-map', function(Y) {
                     newContent,
                     delay;
 
-                if (expanded) {
+                if (_expanded) {
                     newHeight = '0';
                     newOpacity = 0;
                     newContent = 'Karte anzeigen';
                     delay = 0;
-                    expanded = false;
+                    _expanded = false;
                 } else {
                     newHeight = Y.one(_cfg.mapDOMId).getStyle('height');
                     newOpacity = 1;
                     newContent = 'Karte verstecken';
                     delay = 0.3;
-                    expanded = true;
+                    _expanded = true;
                 }
 
                 // animation
