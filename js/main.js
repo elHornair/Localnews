@@ -1,3 +1,4 @@
+/*global window, navigator, YUI */
 YUI({
     modules: {
        'ln-geolocation': {
@@ -11,6 +12,39 @@ YUI({
        }
     }
 }).use('node', 'event-custom', 'json-parse', 'json-stringify', 'io-base', 'transition', 'ln-geolocation', 'ln-articlemanager', 'ln-map', function(Y) {
+    "use strict";
+
+    var _handleAjaxResponse = function (id, response) {
+        var data = Y.JSON.parse(response.responseText);
+
+        _replaceSubTitle(data.title, data.title_addition);
+        Y.ln.map.setRegion(data.index);
+        Y.ln.articlemanager.replaceArticles(data.articles);
+    },
+
+    _replaceSubTitle = function (location, addition) {
+        var subtitle = Y.one('#subtitle'),
+            currentLocation = Y.one('#location').get('innerHTML');
+
+        if (currentLocation != location && !(currentLocation == '...' && Y.Lang.isUndefined(location))) {
+            subtitle.setStyle('opacity', 0);
+
+            if (!Y.Lang.isUndefined(location)) {
+                Y.one('#location').set('innerHTML', location);
+                Y.one('#location_addition').set('innerHTML', addition);
+            } else {
+                Y.one('#location').set('innerHTML', '...');
+                Y.one('#location_addition').set('innerHTML', '');
+            }
+
+            subtitle.transition({
+                easing: 'ease-out',
+                duration: 0.6,
+                opacity: 1
+            });
+        }
+
+    };
 
     // map
     Y.ln.map.init({
@@ -53,37 +87,5 @@ YUI({
 
     // ajax
     Y.on('io:complete', _handleAjaxResponse, Y);
-
-    function _handleAjaxResponse(id, response) {
-        var data = Y.JSON.parse(response.responseText);
-
-        _replaceSubTitle(data.title, data.title_addition);
-        Y.ln.map.setRegion(data.index);
-        Y.ln.articlemanager.replaceArticles(data.articles);
-    };
-
-    function _replaceSubTitle(location, addition) {
-        var subtitle = Y.one('#subtitle'),
-            currentLocation = Y.one('#location').get('innerHTML');
-
-        if (currentLocation != location && !(currentLocation == '...' && Y.Lang.isUndefined(location))) {
-            subtitle.setStyle('opacity', 0);
-
-            if (!Y.Lang.isUndefined(location)) {
-                Y.one('#location').set('innerHTML', location);
-                Y.one('#location_addition').set('innerHTML', addition);
-            } else {
-                Y.one('#location').set('innerHTML', '...');
-                Y.one('#location_addition').set('innerHTML', '');
-            }
-
-            subtitle.transition({
-                easing: 'ease-out',
-                duration: 0.6,
-                opacity: 1
-            });
-        }
-
-    }
 
 });

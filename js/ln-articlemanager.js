@@ -1,12 +1,13 @@
+/*global window, navigator, YUI */
 YUI.add('ln-articlemanager', function(Y) {
-
+    "use strict";
     Y.namespace('ln');
 
     Y.ln.articlemanager = function() {
 
         var _itemHeights,
-            _currentItem
-            _transitionTime = 0.3;
+            _currentItem,
+            _transitionTime = 0.3,
 
         _handleItemClick = function (e) {
             var clickedItem,
@@ -42,17 +43,17 @@ YUI.add('ln-articlemanager', function(Y) {
                 });
             }
 
-        }
+        };
 
         return {
 
             replaceArticles: function(articles) {
-
                 // remove old articles
                 var container,
                     articleItem,
                     headItem,
-                    bodyItem;
+                    bodyItem,
+                    i;
 
                 // reset previous values
                 _currentItem = undefined;

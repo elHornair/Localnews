@@ -1,5 +1,6 @@
+/*global window, navigator, YUI */
 YUI.add('ln-map', function(Y) {
-
+    "use strict";
     Y.namespace('ln');
 
     Y.ln.map = function() {
@@ -32,16 +33,16 @@ YUI.add('ln-map', function(Y) {
         },
 
         _handleMapClick = function (e) {
-            var container = Y.one(_cfg.containerDOMId);
-            var pointer = Y.one(_cfg.pointerDOMId);
-            var currentX = e.pageX - container.getX();
-            var currentY = e.pageY - container.getY();
+            var container = Y.one(_cfg.containerDOMId),
+                pointer = Y.one(_cfg.pointerDOMId),
+                currentX = e.pageX - container.getX(),
+                currentY = e.pageY - container.getY();
 
             pointer.setStyle('left', currentX);
             pointer.setStyle('top', currentY);
 
             _dispatchLocationSelected(_localToLongitude(currentX), _localToLatitude(currentY));
-        }
+        },
 
         _dispatchLocationSelected = function (long, lat) {
             Y.fire('ln-map:onLocationSelected', {
@@ -65,8 +66,8 @@ YUI.add('ln-map', function(Y) {
             },
 
             setRegion: function (regionIndex) {
-                var map_overlay = Y.one(_cfg.mapOverlayDOMId);
-                var imgHeight = Y.one(_cfg.mapDOMId).getStyle('height');
+                var map_overlay = Y.one(_cfg.mapOverlayDOMId),
+                    imgHeight = Y.one(_cfg.mapDOMId).getStyle('height');
                 imgHeight = parseInt(imgHeight.substr(0, imgHeight.length-2), 10);
                 imgHeight = (imgHeight > 381) ? imgHeight + 0.5 : imgHeight;// hack, to make calculation on big screens accurate
                 map_overlay.setStyle('display', 'block');
