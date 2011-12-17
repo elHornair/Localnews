@@ -31,6 +31,14 @@ header p {
     color: rgb(136,59,59);
 }
 
+.spinner {
+    width: 465px;
+    height: 312px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url('spinner.gif');
+}
+
 /******************** map ********************/
 #map_container {
     overflow: hidden;
@@ -108,6 +116,10 @@ button.showMap:hover {
 }
 
 /****************** articles *****************/
+#articleAccordion {
+    width: 100%;
+}
+
 article {
     border-bottom: dotted;
     border-color: rgb(49,72,120);
